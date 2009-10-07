@@ -1,7 +1,7 @@
 ﻿(function($) {
     $.fn.oembed = function(url, options, callback) {
 
-        options = $.extend({}, $.fn.oembed.defaults, options);
+        options = $.extend(true, $.fn.oembed.defaults, options);
 
         return this.each(function() {
 
@@ -19,7 +19,7 @@
                 if (provider != null) {
                     provider.maxWidth = options.maxWidth;
                     provider.maxHeight = options.maxHeight;					
-					provider.params = options[provider.name];					
+					provider.params = options[provider.name] || {};
                     provider.embedCode(container, resourceURL, callback);
                     return;
                 }
@@ -31,8 +31,8 @@
 
     // Plugin defaults
     $.fn.oembed.defaults = {
-        maxWidth: 500,
-        maxHeight: 400,
+        maxWidth: null,
+        maxHeight: null,
 		embedMethod: "replace", // "auto", "append", "fill"
     };
 	
@@ -160,12 +160,18 @@
                 	qs += "&" + escape(i) + "=" + this.params[i];
             }			
 
-            url += "maxwidth=" + this.maxWidth +
-						"&maxHeight=" + this.maxHeight +
-						"&format=json" +
-						"&url=" + escape(externalUrl) +
-						qs + 
-						"&" + this.callbackparameter + "=?";
+            url += "format=json";
+			
+			if (this.maxWidth != null)
+				url += "&maxwidth=" + this.maxWidth;
+				
+			if (this.maxHeight != null)
+				url += "&maxheight=" + this.maxHeight;			
+				
+			url += "&url=" + escape(externalUrl) + 			
+					qs + 
+					"&" + this.callbackparameter + "=?";
+					
             return url;
         }
 
