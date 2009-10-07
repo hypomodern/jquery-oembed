@@ -19,6 +19,7 @@
                 if (provider != null) {
                     provider.maxWidth = options.maxWidth;
                     provider.maxHeight = options.maxHeight;					
+					provider.params = options[provider.name];					
                     provider.embedCode(container, resourceURL, callback);
                     return;
                 }
@@ -59,7 +60,7 @@
 						.after('<div class="oembed-container"></div>')
 						.next(".oembed-container");
 					if (oembed != null && oembed.provider_name != null)
-					    oembedContainer.toggleClass("oembed-contaner-" + oembed.provider_name);		
+					    oembedContainer.toggleClass("oembed-container-" + oembed.provider_name);		
 				}
 				oembedContainer.html(oembed.code);				
 				break;			
@@ -147,10 +148,23 @@
             if (url.indexOf("?") <= 0)
                 url = url + "?";
 
+			var qs = "";
+
+			for (var i in this.params) {
+                // We don't want them to jack everything up by changing the callback parameter
+                if (i == this.callbackparameter)
+                  continue;
+                
+				// allows the options to be set to null, don't send null values to the server as parameters
+                if (this.params[i] != null)
+                	qs += "&" + escape(i) + "=" + this.params[i];
+            }			
+
             url += "maxwidth=" + this.maxWidth +
 						"&maxHeight=" + this.maxHeight +
 						"&format=json" +
 						"&url=" + escape(externalUrl) +
+						qs + 
 						"&" + this.callbackparameter + "=?";
             return url;
         }
