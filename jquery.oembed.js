@@ -5,9 +5,9 @@
 
         return this.each(function() {
 
-            var container = $(this);
-            var resourceURL = (url != null) ? url : container.attr("href");
-            var provider;
+            var container = $(this),
+				resourceURL = (url != null) ? url : container.attr("href"),
+				provider;
 
             if (!callback) callback = function(container, oembed) {			
 				 $.fn.oembed.insertCode(container, options.embedMethod, oembed);
@@ -33,7 +33,7 @@
     $.fn.oembed.defaults = {
         maxWidth: null,
         maxHeight: null,
-		embedMethod: "replace", // "auto", "append", "fill"
+		embedMethod: "replace" // "auto", "append", "fill"
     };
 	
 	$.fn.oembed.insertCode = function(container, embedMethod, oembed) {
