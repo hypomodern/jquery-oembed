@@ -343,7 +343,6 @@
       new $.fn.oembed.OEmbedProvider("slideshare", "rich", ["slideshare\.net"], "http://www.slideshare.net/api/oembed/1"),
       new $.fn.oembed.OEmbedProvider("photobucket", "photo", ["photobucket\\.com/(albums|groups)/.*"], "http://photobucket.com/oembed/"),
       new $.fn.oembed.OEmbedProvider("mlg-tv", "video", ["tv.majorleaguegaming.com/video/.*"], "http://tv.majorleaguegaming.com/oembed.json")
-      // new $.fn.oembed.OEmbedProvider("mlg-tv", "video", ["mlg-tv\.dev/video/.*"], "http://mlg-tv.dev/oembed.json")
       // new $.fn.oembed.OEmbedProvider("vids.myspace.com", "video", ["vids\.myspace\.com"]), // "http://vids.myspace.com/index.cfm?fuseaction=oembed" (not working)
       // new $.fn.oembed.OEmbedProvider("screenr", "rich", ["screenr\.com"], "http://screenr.com/api/oembed.json") (error)    
       // new $.fn.oembed.OEmbedProvider("qik", "video", ["qik\\.com/\\w+"], "http://qik.com/api/oembed.json"),    
